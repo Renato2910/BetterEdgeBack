@@ -1,0 +1,28 @@
+// prisma/schema.prisma
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL") 
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Modelo Cliente
+model Cliente {
+  id      Int      @id @default(autoincrement())  
+  nome    String   
+  email   String   @unique 
+  status  String   
+  ativos  Ativo[]  @relation("ClienteAtivos") 
+}
+
+// Modelo Ativo
+model Ativo {
+  id         Int      @id @default(autoincrement())  
+  nome       String   
+  valorAtual Float    
+  clienteId  Int      
+  cliente    Cliente  @relation(fields: [clienteId], references: [id], name: "ClienteAtivos") 
+}
