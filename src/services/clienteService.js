@@ -32,9 +32,28 @@ async function update(id, data) {
   });
 }
 
+async function deleteCliente(id) {
+  try {
+    // Excluir os ativos relacionados ao cliente
+    await prisma.ativo.deleteMany({
+      where: {
+        clienteId: Number(id), // Verifica os ativos vinculados ao cliente
+      },
+    });
+
+    // Agora podemos excluir o cliente
+    return await prisma.cliente.delete({
+      where: { id: Number(id) },
+    });
+  } catch (error) {
+    throw new Error("Erro ao deletar cliente: " + error.message);
+  }
+}
+
 module.exports = {
   create,
   getAll,
   getById,
   update,
+  deleteCliente, // Função de exclusão adicionada
 };

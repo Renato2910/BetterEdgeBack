@@ -5,8 +5,8 @@ async function create(data) {
   return await prisma.ativo.create({
     data: {
       nome: data.nome,
-      valorAtual: data.valorAtual, 
-      clienteId: data.clienteId, 
+      valorAtual: data.valorAtual,
+      clienteId: data.clienteId,
     },
   });
 }
@@ -14,7 +14,7 @@ async function create(data) {
 async function getAll() {
   return await prisma.ativo.findMany({
     include: {
-      cliente: true, 
+      cliente: true,
     },
   });
 }
@@ -22,7 +22,7 @@ async function getAll() {
 async function getById(id) {
   return await prisma.ativo.findUnique({
     where: {
-      id: parseInt(id), 
+      id: parseInt(id),
     },
     include: {
       cliente: true,
@@ -33,12 +33,20 @@ async function getById(id) {
 async function update(id, data) {
   return await prisma.ativo.update({
     where: {
-      id: parseInt(id), 
+      id: parseInt(id),
     },
     data: {
       nome: data.nome,
-      valorAtual: data.valorAtual, 
+      valorAtual: data.valorAtual,
       clienteId: data.clienteId,
+    },
+  });
+}
+
+async function deleteAtivo(id) {
+  return await prisma.ativo.delete({
+    where: {
+      id: parseInt(id),
     },
   });
 }
@@ -48,4 +56,5 @@ module.exports = {
   getAll,
   getById,
   update,
+  deleteAtivo,
 };

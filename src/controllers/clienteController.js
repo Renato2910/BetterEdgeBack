@@ -36,9 +36,23 @@ async function updateCliente(req, reply) {
   }
 }
 
+// Função para deletar um cliente
+async function deleteCliente(req, reply) {
+  try {
+    const cliente = await clienteService.deleteCliente(req.params.id);
+    if (!cliente) {
+      return reply.status(404).send({ error: "Cliente não encontrado" });
+    }
+    return reply.status(200).send({ message: "Cliente deletado com sucesso" });
+  } catch (error) {
+    return reply.status(400).send({ error: error.message });
+  }
+}
+
 module.exports = {
   createCliente,
   getClientes,
   getClienteById,
   updateCliente,
+  deleteCliente,  // Função de exclusão adicionada
 };
