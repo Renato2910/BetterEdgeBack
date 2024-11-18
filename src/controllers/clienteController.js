@@ -36,7 +36,6 @@ async function updateCliente(req, reply) {
   }
 }
 
-// Função para deletar um cliente
 async function deleteCliente(req, reply) {
   try {
     const cliente = await clienteService.deleteCliente(req.params.id);
@@ -54,5 +53,5 @@ module.exports = {
   getClientes,
   getClienteById,
   updateCliente,
-  deleteCliente,  // Função de exclusão adicionada
+  deleteCliente,  
 };

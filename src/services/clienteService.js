@@ -34,14 +34,13 @@ async function update(id, data) {
 
 async function deleteCliente(id) {
   try {
-    // Excluir os ativos relacionados ao cliente
+    
     await prisma.ativo.deleteMany({
       where: {
-        clienteId: Number(id), // Verifica os ativos vinculados ao cliente
+        clienteId: Number(id), 
       },
     });
 
-    // Agora podemos excluir o cliente
     return await prisma.cliente.delete({
       where: { id: Number(id) },
     });
@@ -55,5 +54,5 @@ module.exports = {
   getAll,
   getById,
   update,
-  deleteCliente, // Função de exclusão adicionada
+  deleteCliente, 
 };

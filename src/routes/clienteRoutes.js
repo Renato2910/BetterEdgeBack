@@ -5,7 +5,7 @@ async function clienteRoutes(fastify, options) {
   fastify.get("/clientes", clienteController.getClientes);
   fastify.get("/clientes/:id", clienteController.getClienteById);
   fastify.put("/clientes/:id", clienteController.updateCliente);
-  fastify.delete("/clientes/:id", clienteController.deleteCliente); // Rota DELETE adicionada
+  fastify.delete("/clientes/:id", clienteController.deleteCliente); 
 }
 
 module.exports = clienteRoutes;
